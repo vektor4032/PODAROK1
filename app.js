@@ -3,12 +3,12 @@ const greeting = {
   name: 'Кирилл',
   title: 'С 29-летием!',
   paragraphs: [
-    'Я очень рада, что мы познакомились. И ещё больше рада, что после окончания моего обучения мы не потерялись и продолжаем общаться. Я ведь просто пришла учиться, а в итоге познакомилась с человеком, с которым мне хорошо и интересно. Вот такой неожиданный бонус к образованию 😄',
-    'Мне очень нравится, какой ты весёлый и какая у тебя классная энергетика. В тебе чувствуется сила — и при этом с тобой легко, можно посмеяться и просто быть собой. Я иногда смотрю на тебя и думаю: вот бы тоже уметь так заряжать людей и так уверенно идти по жизни. В общем, кое-чему я у тебя всё ещё учусь. Надеюсь, за это уже не надо сдавать домашку)',
-    'Хочется пожелать тебе побольше того, от чего ты сам кайфуешь. Чтобы хватало сил на свои идеи, времени на отдых и чтобы рядом были люди, которые поддерживают тебя так же, как ты умеешь поддерживать других. Пусть всё, что ты давно хочешь, потихоньку получается. Даже то, о чём пока никому не рассказываешь.',
-    'Ну и в 29 уже можно позволить себе многое. Например, купить торт без повода. Хотя сегодня повод как раз есть — так что не отвлекайся на мои задания слишком долго 😄 Спасибо тебе за наше общение. Я его очень ценю. С днём рождения!'
+    'Очень рада, что мы познакомились! И здорово, что после окончания моего обучения мы продолжаем общаться. Учёба закончилась, а интересный человек остался — считаю, удачно сходила 😄',
+    'Ты очень весёлый, и энергетика у тебя классная: с тобой легко, но при этом чувствуется характер и уверенность. Мне бы тоже так! Так что кое-чему я у тебя всё ещё учусь. Только давай уже без домашки)',
+    'Желаю тебе здоровья, денег и времени всё это нормально потратить. Побольше хороших людей рядом, классных поездок и дней, когда всё идёт как надо. И чтобы на свои планы всегда хватало сил, а на отдых не приходилось выпрашивать время у самого себя.',
+    'С 29-летием! Пусть этот год будет классным. Пять заданий ты уже прошёл — на сегодня с тебя хватит, можно идти за тортом 🥳'
   ],
-  signature: 'Обнимаю ♡'
+  signature: 'С днём рождения! И спасибо за наше общение 😄'
 };
 const app = document.querySelector('#app');
 let screen = 0, soundEnabled = false, audio;
@@ -97,7 +97,7 @@ function render() {
   gameToken++;
   app.classList.remove('fade'); void app.offsetWidth; app.classList.add('fade');
   if (screen === 0) {
-    app.innerHTML = `<div class="eyebrow">Сегодня тебе 29</div><h1>Ты перешёл<br>на <em>29-й уровень!</em></h1><p class="intro">Поздравление заперто за пятью испытаниями.<br>Сегодня задания для тебя. Моя очередь проверять! 😎</p><div class="hero-art" aria-hidden="true"><div class="halo"></div><span class="spark s1">✦</span><span class="spark s2">✧</span><span class="spark s3">✦</span><div class="gift"><div class="bow"></div></div></div><button class="primary" id="begin">Начать приключение <span>↗</span></button><p class="small-note">5 испытаний · 5–8 минут · зачёт с хорошим настроением</p><section class="journey" aria-label="Твоё приключение"><article><span class="step-icon">♧</span><div><h3>Взломай сейф</h3><p>Три цифры до сюрприза</p></div></article><article><span class="step-icon">♡</span><div><h3>Найди совпадения</h3><p>Память, ритм и немного логики</p></div></article><article><span class="step-icon">✧</span><div><h3>Собери созвездие</h3><p>Финальная головоломка</p></div></article></section>`;
+    app.innerHTML = `<div class="eyebrow">Сегодня тебе 29</div><h1>Ты перешёл<br>на <em>29-й уровень!</em></h1><p class="intro">Поздравление заперто за пятью испытаниями.<br>Сегодня задания для тебя. Моя очередь проверять! 😎</p><div class="hero-art" aria-hidden="true"><div class="halo"></div><span class="spark s1">✦</span><span class="spark s2">✧</span><span class="spark s3">✦</span><div class="gift"><div class="bow"></div></div></div><button class="primary" id="begin">Начать приключение <span>↗</span></button><p class="small-note">5 испытаний · 5–8 минут · зачёт с хорошим настроением</p><section class="journey" aria-label="Твоё приключение"><article><span class="step-icon">♧</span><div><h3>Взломай сейф</h3><p>Три цифры до сюрприза</p></div></article><article><span class="step-icon">✦</span><div><h3>Найди совпадения</h3><p>Память, ритм и немного логики</p></div></article><article><span class="step-icon">✧</span><div><h3>Собери созвездие</h3><p>Финальная головоломка</p></div></article></section>`;
     document.querySelector('#begin').onclick = () => advance();
   } else if (screen <= 5) {
     const titles = ['Сейф с хорошими новостями', 'Проверим оперативку?', 'Поймай праздничный ритм', 'Теперь моя очередь спрашивать', 'Включи своё созвездие'];
@@ -136,7 +136,7 @@ function pairs() {
   const token = gameToken;
   const board = document.querySelector('#board'); board.className = 'grid';
   document.querySelector('#status').textContent = 'Пары: 0 из 6';
-  board.innerHTML = shuffle(['🌷','💗','🍰','✨','🎁','🍀','🌷','💗','🍰','✨','🎁','🍀']).map((icon, i) => `<button class="tile" data-icon="${icon}" aria-label="Открыть карточку ${i+1}">✧</button>`).join('');
+  board.innerHTML = shuffle(['😎','🎧','🍰','✨','🎁','🍀','😎','🎧','🍰','✨','🎁','🍀']).map((icon, i) => `<button class="tile" data-icon="${icon}" aria-label="Открыть карточку ${i+1}">✧</button>`).join('');
   board.onclick = event => {
     const button = event.target.closest('button');
     if (!button || button.disabled || locked || selected.includes(button)) return;
@@ -262,7 +262,7 @@ function confetti() {
   }
 }
 function finale() {
-  app.innerHTML = `<div class="eyebrow">Миссия выполнена · именинник великолепен</div><h1 class="game-heading">${escapeHTML(greeting.title)} <em>♡</em></h1><p class="intro">Все испытания позади. Можно выдохнуть и принимать поздравления.</p><article class="letter"><h2>${greeting.name ? `${escapeHTML(greeting.name)}, с днём рождения!` : 'Сегодня — твой день.'}</h2>${greeting.paragraphs.map(p => `<p>${escapeHTML(p)}</p>`).join('')}<div class="signature">${escapeHTML(greeting.signature)}</div></article><button class="primary" id="celebrate">Ещё немного волшебства <span>✦</span></button><br><button class="secondary" id="again">Пройти приключение ещё раз</button>`;
+  app.innerHTML = `<div class="eyebrow">Миссия выполнена · именинник великолепен</div><h1 class="game-heading">${escapeHTML(greeting.title)} <em>✦</em></h1><p class="intro">Все испытания позади. Можно выдохнуть и принимать поздравления.</p><article class="letter"><h2>${greeting.name ? `${escapeHTML(greeting.name)}, с днём рождения!` : 'Сегодня — твой день.'}</h2>${greeting.paragraphs.map(p => `<p>${escapeHTML(p)}</p>`).join('')}<div class="signature">${escapeHTML(greeting.signature)}</div></article><button class="primary" id="celebrate">Ещё немного волшебства <span>✦</span></button><br><button class="secondary" id="again">Пройти приключение ещё раз</button>`;
   document.querySelector('#celebrate').onclick = () => {tone(); confetti();};
   document.querySelector('#again').onclick = () => {screen = 0; render();};
   confetti();
