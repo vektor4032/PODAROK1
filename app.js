@@ -14,25 +14,77 @@ const app = document.querySelector('#app');
 let screen = 0, soundEnabled = false, audio;
 let gameToken = 0;
 const escapeHTML = value => value.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-function tone() {
-  if (!soundEnabled) return;
-  try {
-    audio ||= new (window.AudioContext || window.webkitAudioContext)();
-    audio.resume();
-    const oscillator = audio.createOscillator(), gain = audio.createGain();
-    oscillator.connect(gain); gain.connect(audio.destination);
-    oscillator.frequency.value = 520 + Math.random() * 300;
-    gain.gain.setValueAtTime(.06, audio.currentTime);
-    gain.gain.exponentialRampToValueAtTime(.001, audio.currentTime + .25);
-    oscillator.start(); oscillator.stop(audio.currentTime + .25);
-  } catch { /* Игра работает и без поддержки звука. */ }
+let musicGain, musicTimer, nextNoteAt = 0, noteIndex = 0;
+// Лёгкая зацикленная мелодия: ноты синтезируются локально, без загрузки аудио.
+const melody = [72, 76, 79, 76, 74, 77, 81, 77, 71, 74, 79, 74, 72, 76, 79, 84,
+  81, 79, 76, 72, 77, 81, 79, 77, 74, 77, 79, 71, 72, 76, 72, null];
+function playNote(midi, at, duration, volume, destination) {
+  const oscillator = audio.createOscillator(), gain = audio.createGain();
+  oscillator.type = 'sine';
+  oscillator.frequency.value = 440 * 2 ** ((midi - 69) / 12);
+  oscillator.connect(gain); gain.connect(destination);
+  gain.gain.setValueAtTime(0, at);
+  gain.gain.linearRampToValueAtTime(volume, at + .015);
+  gain.gain.exponentialRampToValueAtTime(.0001, at + duration);
+  oscillator.start(at); oscillator.stop(at + duration + .03);
+  oscillator.onended = () => { oscillator.disconnect(); gain.disconnect(); };
 }
-document.querySelector('#sound').onclick = event => {
-  soundEnabled = !soundEnabled;
-  event.currentTarget.setAttribute('aria-pressed', String(soundEnabled));
-  event.currentTarget.setAttribute('aria-label', soundEnabled ? 'Выключить звуки' : 'Включить звуки');
-  tone();
+function scheduleMusic() {
+  if (!soundEnabled || audio.state !== 'running') return;
+  nextNoteAt = Math.max(nextNoteAt, audio.currentTime + .025);
+  while (nextNoteAt < audio.currentTime + .4) {
+    const midi = melody[noteIndex % melody.length];
+    if (midi !== null) playNote(midi, nextNoteAt, .52, .15, musicGain);
+    if (noteIndex % 4 === 0) {
+      const bass = [48, 53, 55, 48][Math.floor(noteIndex / 4) % 4];
+      playNote(bass, nextNoteAt, 1.1, .08, musicGain);
+    }
+    noteIndex++; nextNoteAt += .32;
+  }
+}
+function tone() {
+  if (soundEnabled && audio?.state === 'running') {
+    playNote(84, audio.currentTime, .18, .07, musicGain);
+  }
+}
+const soundButton = document.querySelector('#sound');
+function updateSoundButton() {
+  soundButton.setAttribute('aria-pressed', String(soundEnabled));
+  soundButton.setAttribute('aria-label', soundEnabled ? 'Выключить музыку' : 'Включить музыку');
+  soundButton.title = soundEnabled ? 'Музыка играет — нажми, чтобы выключить' : 'Включить праздничную мелодию';
+  soundButton.textContent = soundEnabled ? '♫' : '♪';
+}
+soundButton.onclick = async () => {
+  soundButton.disabled = true;
+  try {
+    if (soundEnabled) {
+      soundEnabled = false;
+      clearInterval(musicTimer);
+      musicGain.gain.setValueAtTime(0, audio.currentTime);
+      await audio.suspend();
+    } else {
+      audio ||= new (window.AudioContext || window.webkitAudioContext)();
+      if (!musicGain) {
+        musicGain = audio.createGain(); musicGain.connect(audio.destination);
+      }
+      await audio.resume();
+      if (audio.state !== 'running') throw new Error('Audio is not running');
+      soundEnabled = true;
+      musicGain.gain.setValueAtTime(.65, audio.currentTime);
+      nextNoteAt = audio.currentTime + .025; noteIndex = 0;
+      scheduleMusic();
+      musicTimer = setInterval(scheduleMusic, 150);
+    }
+    updateSoundButton();
+  } catch {
+    soundEnabled = false; clearInterval(musicTimer);
+    if (musicGain) musicGain.gain.value = 0;
+    updateSoundButton();
+    soundButton.title = 'Не удалось включить музыку. Попробуй нажать ещё раз.';
+    soundButton.setAttribute('aria-label', soundButton.title);
+  } finally { soundButton.disabled = false; }
 };
+updateSoundButton();
 function shuffle(items) {
   const result = [...items];
   for (let i = result.length - 1; i > 0; i--) {
