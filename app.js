@@ -3,12 +3,12 @@ const greeting = {
   name: 'Кирилл',
   title: 'С 29-летием!',
   paragraphs: [
-    'Я очень рада, что мы познакомились! Когда-то я пришла учиться, а в итоге встретила человека, с которым хочется общаться и после окончания обучения. И я правда счастлива, что у нас получилось это общение сохранить. Пожалуй, это самый приятный бонус к обучению — и явно не тот, который обещали в программе 😄',
-    'Ты очень весёлый человек с самой классной энергетикой. В ней чувствуется сила, уверенность и при этом такая лёгкость, что рядом хочется улыбаться и самой становиться смелее. Очень хочется научиться так же относиться к жизни и заряжать людей вокруг. Если когда-нибудь откроешь курс «Как быть на таком вайбе» — считай, первый ученик уже есть. Да, опять я!',
-    'Желаю, чтобы у тебя самого всегда было достаточно поводов для радости, сил на свои желания и людей рядом, с которыми так же легко и хорошо. Пусть получается то, что важно именно тебе, мечты постепенно превращаются в планы, а планы — в классные истории.',
-    'В 29 желаю денег без «недостаточно средств», отдыха без «я только отвечу на одно сообщение» и приключений, после которых хочется сказать «надо повторить», а не «больше никогда». Пусть этот год будет щедрым на всё хорошее. С днём рождения! 🥳'
+    'Я очень рада, что мы познакомились. И ещё больше рада, что после окончания моего обучения мы не потерялись и продолжаем общаться. Я ведь просто пришла учиться, а в итоге познакомилась с человеком, с которым мне хорошо и интересно. Вот такой неожиданный бонус к образованию 😄',
+    'Мне очень нравится, какой ты весёлый и какая у тебя классная энергетика. В тебе чувствуется сила — и при этом с тобой легко, можно посмеяться и просто быть собой. Я иногда смотрю на тебя и думаю: вот бы тоже уметь так заряжать людей и так уверенно идти по жизни. В общем, кое-чему я у тебя всё ещё учусь. Надеюсь, за это уже не надо сдавать домашку)',
+    'Хочется пожелать тебе побольше того, от чего ты сам кайфуешь. Чтобы хватало сил на свои идеи, времени на отдых и чтобы рядом были люди, которые поддерживают тебя так же, как ты умеешь поддерживать других. Пусть всё, что ты давно хочешь, потихоньку получается. Даже то, о чём пока никому не рассказываешь.',
+    'Ну и в 29 уже можно позволить себе многое. Например, купить торт без повода. Хотя сегодня повод как раз есть — так что не отвлекайся на мои задания слишком долго 😄 Спасибо тебе за наше общение. Я его очень ценю. С днём рождения!'
   ],
-  signature: 'Обнимаю! Очень рада, что ты есть в моей жизни ♡'
+  signature: 'Обнимаю ♡'
 };
 const app = document.querySelector('#app');
 let screen = 0, soundEnabled = false, audio;
@@ -97,44 +97,46 @@ function render() {
   gameToken++;
   app.classList.remove('fade'); void app.offsetWidth; app.classList.add('fade');
   if (screen === 0) {
-    app.innerHTML = `<div class="eyebrow">Сегодня тебе 29</div><h1>Ты перешёл<br>на <em>29-й уровень!</em></h1><p class="intro">Поздравление заперто за тремя испытаниями.<br>Сегодня задания для тебя. Моя очередь проверять! 😎</p><div class="hero-art" aria-hidden="true"><div class="halo"></div><span class="spark s1">✦</span><span class="spark s2">✧</span><span class="spark s3">✦</span><div class="gift"><div class="bow"></div></div></div><button class="primary" id="begin">Начать приключение <span>↗</span></button><p class="small-note">3 испытания · 2 минуты · зачёт с хорошим настроением</p><section class="journey" aria-label="Твоё приключение"><article><span class="step-icon">♧</span><div><h3>Собери подарки</h3><p>Лут на новый год жизни</p></div></article><article><span class="step-icon">♡</span><div><h3>Найди совпадения</h3><p>Проверка памяти. Без паники.</p></div></article><article><span class="step-icon">✧</span><div><h3>Зажги звёзды</h3><p>Желания принимаются без очереди</p></div></article></section>`;
+    app.innerHTML = `<div class="eyebrow">Сегодня тебе 29</div><h1>Ты перешёл<br>на <em>29-й уровень!</em></h1><p class="intro">Поздравление заперто за пятью испытаниями.<br>Сегодня задания для тебя. Моя очередь проверять! 😎</p><div class="hero-art" aria-hidden="true"><div class="halo"></div><span class="spark s1">✦</span><span class="spark s2">✧</span><span class="spark s3">✦</span><div class="gift"><div class="bow"></div></div></div><button class="primary" id="begin">Начать приключение <span>↗</span></button><p class="small-note">5 испытаний · 5–8 минут · зачёт с хорошим настроением</p><section class="journey" aria-label="Твоё приключение"><article><span class="step-icon">♧</span><div><h3>Взломай сейф</h3><p>Три цифры до сюрприза</p></div></article><article><span class="step-icon">♡</span><div><h3>Найди совпадения</h3><p>Память, ритм и немного логики</p></div></article><article><span class="step-icon">✧</span><div><h3>Собери созвездие</h3><p>Финальная головоломка</p></div></article></section>`;
     document.querySelector('#begin').onclick = () => advance();
-  } else if (screen <= 3) {
-    const titles = ['Забирай праздничный лут', 'Проверим оперативку?', 'Загадывай. Сегодня можно всё.'];
-    const hints = ['Открой четыре подарка. Тут без носков и геля для душа. Обещаю.', 'Найди четыре пары. Если забыл, где торт, — это просто голод.', 'Зажги все пять звёзд и загадай желание. Можно нескромное.'];
-    app.innerHTML = `<div class="progress" aria-label="Уровень ${screen} из 3">${[1,2,3].map(n => `<i class="${n <= screen ? 'active' : ''}"></i>`).join('')}</div><div class="eyebrow">Уровень 0${screen} / 03</div><h1 class="game-heading">${titles[screen-1]}</h1><p class="intro">${hints[screen-1]}</p><section class="game-panel"><div class="game-status" role="status" aria-live="polite" id="status"></div><div id="board"></div></section><div id="next"></div><button class="secondary" id="restart">Вернуться в начало</button>`;
+  } else if (screen <= 5) {
+    const titles = ['Сейф с хорошими новостями', 'Проверим оперативку?', 'Поймай праздничный ритм', 'Теперь моя очередь спрашивать', 'Включи своё созвездие'];
+    const hints = ['Разгадай три подсказки и введи код. Взлом совершенно легальный.', 'Найди шесть пар. Карточки одинаковые, а вот где они лежат — вопрос.', 'Смотри, в каком порядке загораются кнопки, и повторяй. Три раунда, без таймера.', 'Три задачки на логику. Преподаватель сегодня по другую сторону зачёта 😄', 'Зажги все девять звёзд. Нажатие переключает звезду и её соседей сверху, снизу, слева и справа.'];
+    app.innerHTML = `<div class="progress" aria-label="Уровень ${screen} из 5">${[1,2,3,4,5].map(n => `<i class="${n <= screen ? 'active' : ''}"></i>`).join('')}</div><div class="eyebrow">Уровень 0${screen} / 05</div><h1 class="game-heading">${titles[screen-1]}</h1><p class="intro">${hints[screen-1]}</p><section class="game-panel"><div class="game-status" role="status" aria-live="polite" id="status"></div><div id="board"></div></section><div id="next"></div><button class="secondary" id="restart">Вернуться в начало</button>`;
     document.querySelector('#restart').onclick = () => {screen = 0; render();};
-    if (screen === 1) gifts();
+    if (screen === 1) safe();
     if (screen === 2) pairs();
-    if (screen === 3) stars();
+    if (screen === 3) rhythm();
+    if (screen === 4) quiz();
+    if (screen === 5) stars();
   } else finale();
 }
 function advance() { tone(); screen++; render(); }
 function completed(message) {
   document.querySelector('#status').textContent = message;
-  document.querySelector('#next').innerHTML = `<button class="primary" id="continue">${screen === 3 ? 'Открыть поздравление' : 'Следующий уровень'} <span>↗</span></button>`;
+  document.querySelector('#next').innerHTML = `<button class="primary" id="continue">${screen === 5 ? 'Открыть поздравление' : 'Следующий уровень'} <span>↗</span></button>`;
   document.querySelector('#continue').onclick = advance;
 }
-function gifts() {
-  let count = 0;
-  const wishes = ['Здоровье', 'Деньги', 'Удача', 'Отпуск'];
-  const board = document.querySelector('#board'); board.className = 'grid';
-  document.querySelector('#status').textContent = 'Подарки: 0 из 4';
-  board.innerHTML = wishes.map((wish, i) => `<button class="tile" aria-label="Открыть подарок ${i+1}" data-wish="${wish}">🎁</button>`).join('');
-  board.onclick = event => {
-    const button = event.target.closest('button'); if (!button || button.disabled) return;
-    button.disabled = true; button.classList.add('found'); button.textContent = ['🌷','💗','🍀','✨'][count++];
-    button.setAttribute('aria-label', button.dataset.wish);
-    document.querySelector('#status').textContent = `${button.dataset.wish} — для тебя! Подарки: ${count} из 4`; tone();
-    if (count === 4) completed('Лут собран! В налоговую сообщать не надо.');
+function safe() {
+  const board = document.querySelector('#board');
+  board.innerHTML = `<ol class="clues"><li>Сколько двоек в числе 29?</li><li>Сколько жизней у кота, если верить поговорке?</li><li>Сколько свечей останется на торте, если из пяти убрать две?</li></ol><form id="safe-form"><label for="code">Трёхзначный код</label><div class="code-row"><input id="code" inputmode="numeric" pattern="[0-9]{3}" maxlength="3" autocomplete="off" required placeholder="···"><button class="primary">Открыть</button></div></form><details class="hint"><summary>Нужна подсказка?</summary>Каждая задачка даёт одну цифру. В числе 29 всего одна двойка; коту приписывают девять жизней. Последняя цифра — 5 − 2.</details>`;
+  document.querySelector('#status').textContent = 'Введи цифры в порядке подсказок.';
+  document.querySelector('#safe-form').onsubmit = event => {
+    event.preventDefault();
+    if (document.querySelector('#code').value !== '193') {
+      document.querySelector('#status').textContent = 'Пока не сходится. Посмотри на каждую подсказку отдельно — попытки не ограничены.'; return;
+    }
+    tone(); completed('Сейф открыт! Никаких носков, только следующий уровень.');
+    document.querySelector('#code').disabled = true;
+    document.querySelector('#safe-form button').disabled = true;
   };
 }
 function pairs() {
   let selected = [], locked = false, matches = 0;
   const token = gameToken;
   const board = document.querySelector('#board'); board.className = 'grid';
-  document.querySelector('#status').textContent = 'Пары: 0 из 4';
-  board.innerHTML = shuffle(['🌷','💗','🍰','✨','🌷','💗','🍰','✨']).map((icon, i) => `<button class="tile" data-icon="${icon}" aria-label="Открыть карточку ${i+1}">✧</button>`).join('');
+  document.querySelector('#status').textContent = 'Пары: 0 из 6';
+  board.innerHTML = shuffle(['🌷','💗','🍰','✨','🎁','🍀','🌷','💗','🍰','✨','🎁','🍀']).map((icon, i) => `<button class="tile" data-icon="${icon}" aria-label="Открыть карточку ${i+1}">✧</button>`).join('');
   board.onclick = event => {
     const button = event.target.closest('button');
     if (!button || button.disabled || locked || selected.includes(button)) return;
@@ -143,8 +145,8 @@ function pairs() {
     if (selected[0].dataset.icon === selected[1].dataset.icon) {
       selected.forEach(card => {card.disabled = true; card.classList.add('found');});
       selected = []; matches++;
-      document.querySelector('#status').textContent = `Пары: ${matches} из 4`;
-      if (matches === 4) completed('Оперативка в порядке! Все четыре пары на месте.');
+      document.querySelector('#status').textContent = `Пары: ${matches} из 6`;
+      if (matches === 6) completed('Оперативка в порядке! Все шесть пар на месте.');
     } else {
       locked = true;
       setTimeout(() => {
@@ -155,17 +157,100 @@ function pairs() {
     }
   };
 }
+function rhythm() {
+  const token = gameToken;
+  const sequence = Array.from({length: 5}, () => Math.floor(Math.random() * 4));
+  let round = 0, input = 0, showing = false, finished = false;
+  const board = document.querySelector('#board');
+  board.innerHTML = `<div class="rhythm-grid">${['🌙','☀️','⚡','🌈'].map((icon,i) => `<button class="tile rhythm-key" data-key="${i}" aria-label="Кнопка ${i+1}">${icon}</button>`).join('')}</div><button class="secondary" id="replay">Показать последовательность</button><p class="small-note">Можно играть без звука. Каждый новый раунд на одну ноту длиннее.</p>`;
+  const keys = [...board.querySelectorAll('.rhythm-key')];
+  const replay = document.querySelector('#replay');
+  const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
+  async function show() {
+    if (showing || finished) return;
+    showing = true; input = 0; replay.disabled = true;
+    keys.forEach(key => key.disabled = true);
+    document.querySelector('#status').textContent = `Раунд ${round+1} из 3: запомни ${round+3} нажатия.`;
+    await delay(400);
+    for (const index of sequence.slice(0, round+3)) {
+      if (token !== gameToken) return;
+      keys[index].classList.add('playing');
+      if (soundEnabled && audio?.state === 'running') playNote([72,76,79,84][index], audio.currentTime, .25, .15, musicGain);
+      await delay(550);
+      keys[index].classList.remove('playing'); await delay(220);
+    }
+    if (token !== gameToken) return;
+    showing = false; replay.disabled = false; keys.forEach(key => key.disabled = false);
+    document.querySelector('#status').textContent = `Твоя очередь: ${round+3} нажатия. Раунд ${round+1} из 3.`;
+  }
+  replay.onclick = show;
+  keys.forEach((key,index) => key.onclick = () => {
+    if (showing || finished) return;
+    tone();
+    if (index !== sequence[input]) {
+      input = 0;
+      document.querySelector('#status').textContent = 'Чуть мимо! Начни последовательность сначала или посмотри её ещё раз.';
+      return;
+    }
+    input++;
+    document.querySelector('#status').textContent = `Верно: ${input} из ${round+3}`;
+    if (input === round+3) {
+      round++; input = 0;
+      if (round === 3) {
+        finished = true; keys.forEach(key => key.disabled = true); replay.disabled = true;
+        completed('Ритм пойман. Можно собирать группу!');
+      } else show();
+    }
+  });
+  show();
+}
+function quiz() {
+  const questions = [
+    { text: 'Ты обогнал бегуна, который был вторым. На каком месте ты теперь?', answers: ['На первом', 'На втором', 'На третьем'], correct: 1, hint: 'Ты занял его место. Лидер всё ещё впереди.' },
+    { text: 'Два отца и два сына съели три куска торта. Каждому достался один. Как так?', answers: ['Один кусок разделили', 'Их было трое: дед, отец и сын', 'Торт был очень убедительный'], correct: 1, hint: 'Один человек может быть и отцом, и сыном одновременно.' },
+    { text: 'В комнате три лампы. Ты выключил две. Сколько ламп осталось в комнате?', answers: ['Одна', 'Две', 'Три'], correct: 2, hint: 'Выключенные лампы никуда не ушли. Даже на праздник.' }
+  ];
+  let current = 0;
+  const board = document.querySelector('#board');
+  function draw() {
+    const question = questions[current];
+    document.querySelector('#status').textContent = `Вопрос ${current+1} из 3`;
+    board.innerHTML = `<p class="question">${question.text}</p><div class="answers">${question.answers.map((answer,i) => `<button class="answer" data-answer="${i}">${answer}</button>`).join('')}</div>`;
+    board.querySelectorAll('.answer').forEach(button => button.onclick = () => {
+      if (Number(button.dataset.answer) !== question.correct) {
+        button.disabled = true;
+        document.querySelector('#status').textContent = question.hint; return;
+      }
+      tone(); current++;
+      if (current < questions.length) draw();
+      else { board.innerHTML = '<p class="question">Зачёт! Даже пересдача не понадобилась 😎</p>'; completed('Теперь осталось зажечь звёзды.'); }
+    });
+  }
+  draw();
+}
 function stars() {
-  let count = 0;
-  const board = document.querySelector('#board'); board.className = 'stars';
-  document.querySelector('#status').textContent = 'Звёзды: 0 из 5';
-  board.innerHTML = [[8,45],[29,3],[45,53],[65,12],[77,62]].map(([left,top],i) => `<button class="star-button" style="left:${left}%;top:${top}%" aria-label="Зажечь звезду ${i+1}" aria-pressed="false">✧</button>`).join('');
-  board.onclick = event => {
-    const button = event.target.closest('button'); if (!button || button.disabled) return;
-    button.disabled = true; button.classList.add('lit'); button.textContent = '✦'; button.setAttribute('aria-pressed','true'); count++; tone();
-    document.querySelector('#status').textContent = `Звёзды: ${count} из 5`;
-    if (count === 5) completed('Заявка во Вселенную отправлена. Жди приятных сюрпризов!');
-  };
+  const board = document.querySelector('#board');
+  let cells, moves = 0, finished = false;
+  const affected = index => [index, ...(index >= 3 ? [index-3] : []), ...(index < 6 ? [index+3] : []), ...(index % 3 ? [index-1] : []), ...(index % 3 < 2 ? [index+1] : [])];
+  function reset() {
+    cells = Array(9).fill(true);
+    [0,4,8].forEach(index => affected(index).forEach(i => cells[i] = !cells[i]));
+    moves = 0; finished = false; draw();
+  }
+  function draw() {
+    board.innerHTML = `<div class="constellation">${cells.map((lit,i) => `<button class="tile ${lit ? 'playing' : ''}" data-star="${i}" aria-label="Звезда ${i+1}" aria-pressed="${lit}" ${finished ? 'disabled' : ''}>${lit ? '✦' : '✧'}</button>`).join('')}</div><button class="secondary" id="reset-stars">Сбросить звёзды</button><details class="hint"><summary>Подсказка к созвездию</summary>После сброса нажми верхнюю левую, центральную и нижнюю правую звёзды. Порядок не важен. Попробуй сначала найти решение сам!</details>`;
+    document.querySelector('#status').textContent = `Горят ${cells.filter(Boolean).length} из 9 · Ходов: ${moves}`;
+    board.querySelectorAll('[data-star]').forEach(button => button.onclick = () => {
+      if (finished) return;
+      affected(Number(button.dataset.star)).forEach(i => cells[i] = !cells[i]); moves++; tone();
+      finished = cells.every(Boolean); draw();
+      if (finished) completed('Все звёзды зажглись. Загадывай желание — и открывай письмо.');
+    });
+    document.querySelector('#reset-stars').onclick = () => {
+      document.querySelector('#next').replaceChildren(); reset();
+    };
+  }
+  reset();
 }
 function confetti() {
   const container = document.querySelector('#confetti'); container.replaceChildren();
